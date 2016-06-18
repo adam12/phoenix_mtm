@@ -1,2 +1,2 @@
-defmodule Phoenix.MTM do
+defmodule PhoenixMTM do
 end

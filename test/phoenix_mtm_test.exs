@@ -1,6 +1,6 @@
-defmodule Phoenix.MTMTest do
+defmodule PhoenixMTMTest do
   use ExUnit.Case
-  doctest Phoenix.MTM
+  doctest PhoenixMTM
 
   test "the truth" do
     assert 1 + 1 == 2

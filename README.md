@@ -17,12 +17,12 @@ Add phoenix_mtm to your list of dependencies in `mix.exs`:
 
 1. Ensure your schema is setup with a `many_to_many` association. You will likely
    need to ensure the `on_delete` and `on_replace` keys are present. See the example
-   in the docs for `Phoenix.MTM.Changeset.cast_collection`.
+   in the docs for `PhoenixMTM.Changeset.cast_collection`.
 
-2. Inside your changeset function, pipe your changeset through `Phoenix.MTM.Changeset.cast_collection`,
+2. Inside your changeset function, pipe your changeset through `PhoenixMTM.Changeset.cast_collection`,
    providing the association name, repo module, ans association module.
 
-3. Inside your template, call `Phoenix.MTM.Helpers.collection_checkboxes` where
+3. Inside your template, call `PhoenixMTM.Helpers.collection_checkboxes` where
    you want the output of checkboxes to occur. This function accepts a form,
    the association name, a keyword list of values, and a list of pre-selected values.
 

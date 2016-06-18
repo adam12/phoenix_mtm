@@ -1,4 +1,4 @@
-defmodule Phoenix.MTM.Changeset do
+defmodule PhoenixMTM.Changeset do
   @moduledoc """
   Provides many_to_many helpers for Ecto Changesets.
   """
@@ -21,7 +21,7 @@ defmodule Phoenix.MTM.Changeset do
       def changeset(model, params \\ %{}) do
         model
         |> cast(params, ~w())
-        |> Phoenix.MTM.Changeset.cast_collection(:tags, App.Repo, App.Tag)
+        |> PhoenixMTM.Changeset.cast_collection(:tags, App.Repo, App.Tag)
       end
 
   """
