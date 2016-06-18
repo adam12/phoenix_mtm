@@ -1,8 +1,22 @@
 defmodule Phoenix.MTM.Helpers do
+  @moduledoc """
+  Provides HTML helpers for Phoenix.
+  """
+
   import Phoenix.HTML
   import Phoenix.HTML.Tag
   import Phoenix.HTML.Form
 
+  @doc """
+  Generates a list of checkboxes and labels to update a Phoenix
+  many_to_many relationship.
+
+
+  ## Example
+
+      <%= Phoenix.MTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)) %>
+
+  """
   def collection_checkboxes(form, field, collection, opts \\ []) do
     name = field_name(form, field) <> "[]"
     selected = Keyword.get(opts, :selected, [])
