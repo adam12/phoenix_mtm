@@ -21,7 +21,8 @@ defmodule Phoenix.MTM.Mixfile do
 
   defp deps do
     [{:phoenix_html, "~> 2.0"},
-      {:ecto, "~> 2.0.0-rc"}]
+     {:ecto, "~> 2.0.0-rc"},
+     {:ex_doc, ">= 0.0.0", only: :dev}]
   end
 
   defp description do
