@@ -1,20 +1,34 @@
-# Phoenix.MTM
+# Phoenix MTM Helpers
 
-**TODO: Add description**
+A small collection of functions to make it easier working with `many_to_many` Ecto
+associations and checkboxes to create them.
+
+If you are familiar with Ruby on Rails, analogous to `collection_check_boxes`.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Add phoenix_mtm to your list of dependencies in `mix.exs`:
 
-  1. Add phoenix_mtm to your list of dependencies in `mix.exs`:
+      def deps do
+        [{:phoenix_mtm, "~> 0.1.0"}]
+      end
 
-        def deps do
-          [{:phoenix_mtm, "~> 0.0.1"}]
-        end
+## Usage
 
-  2. Ensure phoenix_mtm is started before your application:
+1. Ensure your schema is setup with a `many_to_many` association. You will likely
+   need to ensure the `on_delete` and `on_replace` keys are present. See the example
+   in the docs for `Phoenix.MTM.Changeset.cast_collection`.
 
-        def application do
-          [applications: [:phoenix_mtm]]
-        end
+2. Inside your changeset function, pipe your changeset through `Phoenix.MTM.Changeset.cast_collection`,
+   providing the association name, repo module, ans association module.
 
+3. Inside your template, call `Phoenix.MTM.Helpers.collection_checkboxes` where
+   you want the output of checkboxes to occur. This function accepts a form,
+   the association name, a keyword list of values, and a list of pre-selected values.
+
+   You can pass along attributes directly to the generated inputs and labels by
+   passing a keyword list inside both `label_opts` and `input_opts` keys.
+
+## TODO
+
+- It would be nice to not have to get! each relationship we want to associate.
