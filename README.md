@@ -28,7 +28,3 @@ Add phoenix_mtm to your list of dependencies in `mix.exs`:
 
    You can pass along attributes directly to the generated inputs and labels by
    passing a keyword list inside both `label_opts` and `input_opts` keys.
-
-## TODO
-
-- It would be nice to not have to get! each relationship we want to associate.

@@ -4,6 +4,7 @@ defmodule PhoenixMTM.Changeset do
   """
 
   import Ecto.Changeset, only: [put_assoc: 3]
+  import Ecto.Query
 
   @doc """
   Cast a collection of IDs into a many_to_many association.
@@ -30,11 +31,8 @@ defmodule PhoenixMTM.Changeset do
       {:ok, ids} ->
         changes =
           ids
-          |> Enum.filter(&not_nil/1)
-          |> Enum.map(fn id ->
-            # FIXME: Can we skip the get! somehow?
-            mod.changeset(repo.get!(mod, id), %{})
-          end)
+          |> all(repo, mod)
+          |> Enum.map(&Ecto.Changeset.change/1)
 
         put_assoc(set, assoc, changes)
       :error ->
@@ -42,5 +40,7 @@ defmodule PhoenixMTM.Changeset do
     end
   end
 
-  defp not_nil(value), do: !is_nil(value)
+  defp all(ids, repo, mod) do
+    repo.all(from m in mod, where: m.id in ^ids)
+  end
 end
