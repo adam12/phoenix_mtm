@@ -3,7 +3,7 @@ defmodule PhoenixMTM.Changeset do
   Provides many_to_many helpers for Ecto Changesets.
   """
 
-  import Ecto.Changeset, only: [put_assoc: 3]
+  import Ecto.Changeset, only: [put_assoc: 3, change: 1]
   import Ecto.Query
 
   @doc """
@@ -32,7 +32,7 @@ defmodule PhoenixMTM.Changeset do
         changes =
           ids
           |> all(repo, mod)
-          |> Enum.map(&Ecto.Changeset.change/1)
+          |> Enum.map(&change/1)
 
         put_assoc(set, assoc, changes)
       :error ->
