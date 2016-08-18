@@ -20,6 +20,7 @@ defmodule PhoenixMTM.Helpers do
   def collection_checkboxes(form, field, collection, opts \\ []) do
     name = field_name(form, field) <> "[]"
     selected = Keyword.get(opts, :selected, [])
+    class = Keyword.get(opts, :class, "")
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
 
@@ -32,6 +33,13 @@ defmodule PhoenixMTM.Helpers do
         |> Keyword.put(:id, id)
         |> Keyword.put(:name, name)
         |> Keyword.put(:value, "#{value}")
+
+      input_opts =
+        if String.length(class) > 0 do
+          Keyword.put(input_opts, :class, class)
+        else
+          input_opts
+        end
 
       input_opts =
         if Enum.member?(selected, value) do
