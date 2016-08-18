@@ -24,7 +24,7 @@ defmodule PhoenixMTM.Helpers do
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
 
-    inputs = Enum.reduce(collection, [], fn {label, value}, acc ->
+    inputs = Enum.map(collection, fn {label, value} ->
       id = field_id(form, field) <> "_#{value}"
 
       input_opts =
@@ -34,21 +34,11 @@ defmodule PhoenixMTM.Helpers do
         |> Keyword.put(:name, name)
         |> Keyword.put(:value, "#{value}")
 
-      input_opts =
-        if String.length(class) > 0 do
-          Keyword.put(input_opts, :class, class)
-        else
-          input_opts
-        end
+      input_opts = add_class(input_opts, class)
 
-      input_opts =
-        if Enum.member?(selected, value) do
-          Keyword.put(input_opts, :checked, true)
-        else
-          input_opts
-        end
+      input_opts = add_selected(input_opts, selected, value)
 
-      acc ++ [
+      [
         tag(:input, input_opts),
         label(form, field, "#{label}", [for: id] ++ label_opts)
       ]
@@ -59,4 +49,21 @@ defmodule PhoenixMTM.Helpers do
       hidden_input(form, field, [name: name, value: ""])
     )
   end
+
+  defp add_class(opts, class) do
+    if String.length(class) > 0 do
+      Keyword.put(opts, :class, class)
+    else
+      opts
+    end
+  end
+
+  defp add_selected(opts, selected, value) do
+    if Enum.member?(selected, value) do
+      Keyword.put(opts, :checked, true)
+    else
+      opts
+    end
+  end
+
 end
