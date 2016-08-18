@@ -16,13 +16,12 @@ defmodule PhoenixMTM.Helpers do
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)) %>
 
-      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), class: "form-control", selected: Enum.map(f.data.tags, &(&1.id)) %>
+      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), input_opts: [class: "form-control"], selected: Enum.map(f.data.tags, &(&1.id)) %>
 
   """
   def collection_checkboxes(form, field, collection, opts \\ []) do
     name = field_name(form, field) <> "[]"
     selected = Keyword.get(opts, :selected, [])
-    class = Keyword.get(opts, :class, "")
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
 
@@ -36,8 +35,6 @@ defmodule PhoenixMTM.Helpers do
         |> Keyword.put(:name, name)
         |> Keyword.put(:value, "#{value}")
 
-      input_opts = add_class(input_opts, class)
-
       input_opts = add_selected(input_opts, selected, value)
 
       [
@@ -50,14 +47,6 @@ defmodule PhoenixMTM.Helpers do
       inputs ++
       hidden_input(form, field, [name: name, value: ""])
     )
-  end
-
-  defp add_class(opts, class) do
-    if String.length(class) > 0 do
-      Keyword.put(opts, :class, class)
-    else
-      opts
-    end
   end
 
   defp add_selected(opts, selected, value) do

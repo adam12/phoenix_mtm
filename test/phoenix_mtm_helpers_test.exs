@@ -21,7 +21,7 @@ defmodule PhoenixMTM.HelpersTest do
 
   test "generates list of checkboxes and inputs with a class" do
     form = safe_to_string(form_for conn(), "/", [as: :form], fn f ->
-      collection_checkboxes(f, :collection, ["1": 1, "2": 2], class: "form-field")
+      collection_checkboxes(f, :collection, ["1": 1, "2": 2], input_opts: [class: "form-field"])
     end)
 
     assert form =~
