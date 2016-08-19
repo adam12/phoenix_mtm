@@ -41,6 +41,7 @@ defmodule PhoenixMTM.Changeset do
   end
 
   defp all(ids, repo, mod) do
-    repo.all(from m in mod, where: m.id in ^ids)
+    ids_as_ints = Enum.map(ids, fn(i) -> if String.length(i) > 0, do: String.to_integer(i) end)
+    repo.all(from m in mod, where: m.id in ^ids_as_ints)
   end
 end
