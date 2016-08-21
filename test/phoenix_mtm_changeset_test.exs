@@ -47,4 +47,15 @@ defmodule PhoenixMTM.ChangesetTest do
 
     assert photo.tags == [tag_1]
   end
+
+  test "association for existing model", %{tag_1: tag_1, tag_2: tag_2} do
+    changeset = Photo.changeset(%Photo{}, %{tags: [tag_1.id]})
+    photo = TestRepo.insert!(changeset)
+
+    changeset = Photo.changeset(photo, %{tags: [tag_2.id]})
+    TestRepo.update!(changeset)
+    photo = TestRepo.get(Photo, photo.id) |> TestRepo.preload(:tags)
+
+    assert photo.tags == [tag_2]
+  end
 end
