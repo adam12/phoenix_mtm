@@ -16,12 +16,13 @@ defmodule PhoenixMTM.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :ecto]]
   end
 
   defp deps do
     [{:phoenix_html, "~> 2.0"},
      {:ecto, "~> 2.0.0"},
+     {:postgrex, ">= 0.0.0", [optional: true]},
      {:ex_doc, ">= 0.0.0", only: :dev}]
   end
 
