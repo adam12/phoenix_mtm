@@ -19,16 +19,16 @@ defmodule PhoenixMTM.Changeset do
           on_replace: :delete
       end
 
-      def changeset(model, params \\ %{}) do
-        model
+      def changeset(struct, params \\ %{}) do
+        struct
         |> cast(params, ~w())
         |> PhoenixMTM.Changeset.cast_collection(:tags, App.Repo, App.Tag)
       end
 
   ## Passing a custom collection lookup function
 
-      def changeset(data, params \\ %{}) do
-        data
+      def changeset(struct, params \\ %{}) do
+        struct
         |> cast(params, ~w())
         |> PhoenixMTM.Changeset.cast_collection(:tags, fn ids ->
           # Convert Strings back to Integers

@@ -23,14 +23,14 @@ defmodule PhoenixMTM.ChangesetTest do
         on_replace: :delete
     end
 
-    def changeset(model, params \\ %{}) do
-      model
+    def changeset(struct, params \\ %{}) do
+      struct
       |> cast(params, ~w())
       |> PhoenixMTM.Changeset.cast_collection(:tags, TestRepo, Tag)
     end
 
-    def custom_function_changeset(data, params \\ %{}) do
-      data
+    def custom_function_changeset(struct, params \\ %{}) do
+      struct
       |> cast(params, ~w())
       |> PhoenixMTM.Changeset.cast_collection(:tags, fn ids ->
         # Convert Strings back to Integers for demonstration
