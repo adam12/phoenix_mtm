@@ -36,8 +36,7 @@ defmodule PhoenixMTM.Helpers do
         |> Keyword.put(:id, id)
         |> Keyword.put(:name, name)
         |> Keyword.put(:value, "#{value}")
-
-      input_opts = add_selected(input_opts, selected, value)
+        |> add_selected(selected, value)
 
       [
         tag(:input, input_opts),
