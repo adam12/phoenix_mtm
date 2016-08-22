@@ -80,4 +80,18 @@ defmodule PhoenixMTM.ChangesetTest do
 
     assert photo.tags == [tag_1]
   end
+
+  test "leave association untouched if param not provided", %{tag_1: tag_1} do
+    changeset = Photo.changeset(%Photo{}, %{tags: [tag_1.id]})
+    photo = TestRepo.insert!(changeset)
+    photo = TestRepo.get(Photo, photo.id) |> TestRepo.preload(:tags)
+
+    assert photo.tags == [tag_1]
+
+    changeset = Photo.changeset(photo, %{})
+    TestRepo.update!(changeset)
+    photo = TestRepo.get(Photo, photo.id) |> TestRepo.preload(:tags)
+
+    assert photo.tags == [tag_1]
+  end
 end
