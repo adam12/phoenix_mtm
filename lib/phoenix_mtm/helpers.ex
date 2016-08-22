@@ -12,12 +12,14 @@ defmodule PhoenixMTM.Helpers do
   many_to_many relationship.
 
 
-  ## Example
+  ## Basic Example
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)) %>
 
-      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), input_opts: [class: "form-control"], selected: Enum.map(f.data.tags, &(&1.id)) %>
+  # Custom <input> and <label> options
 
+      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)),
+            label_opts: [class: "form-input"], input_opts: [class: "form-control"] %>
   """
   def collection_checkboxes(form, field, collection, opts \\ []) do
     name = field_name(form, field) <> "[]"
