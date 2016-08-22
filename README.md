@@ -10,7 +10,7 @@ If you are familiar with Ruby on Rails, analogous to `collection_check_boxes`.
 Add phoenix_mtm to your list of dependencies in `mix.exs`:
 
       def deps do
-        [{:phoenix_mtm, "~> 0.2.0"}]
+        [{:phoenix_mtm, "~> 0.3.0"}]
       end
 
 ## Usage
