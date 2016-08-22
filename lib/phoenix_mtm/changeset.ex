@@ -48,7 +48,7 @@ defmodule PhoenixMTM.Changeset do
 
         put_assoc(set, assoc, changes)
       :error ->
-        put_assoc(set, assoc, [])
+        set
     end
   end
 
@@ -62,7 +62,7 @@ defmodule PhoenixMTM.Changeset do
 
         put_assoc(set, assoc, changes)
       :error ->
-        put_assoc(set, assoc, [])
+        set
     end
   end
 
