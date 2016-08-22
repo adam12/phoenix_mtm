@@ -36,7 +36,7 @@ defmodule PhoenixMTM.Helpers do
         |> Keyword.put(:id, id)
         |> Keyword.put(:name, name)
         |> Keyword.put(:value, "#{value}")
-        |> add_selected(selected, value)
+        |> put_selected(selected, value)
 
       [
         tag(:input, input_opts),
@@ -50,7 +50,7 @@ defmodule PhoenixMTM.Helpers do
     )
   end
 
-  defp add_selected(opts, selected, value) do
+  defp put_selected(opts, selected, value) do
     if Enum.member?(selected, value) do
       Keyword.put(opts, :checked, true)
     else
