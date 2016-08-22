@@ -40,6 +40,20 @@ defmodule PhoenixMTM.Changeset do
     end
   end
 
+  def cast_collection(set, assoc, lookup_fn) when is_function(lookup_fn) do
+    case Map.fetch(set.params, to_string(assoc)) do
+      {:ok, ids} ->
+        changes =
+          ids
+          |> lookup_fn.()
+          |> Enum.map(&change/1)
+
+        put_assoc(set, assoc, changes)
+      :error ->
+        put_assoc(set, assoc, [])
+    end
+  end
+
   defp all(ids, repo, mod) do
     repo.all(from m in mod, where: m.id in ^ids)
   end

@@ -14,6 +14,7 @@ defmodule PhoenixMTM.ChangesetTest do
   defmodule Photo do
     use Ecto.Schema
     import Ecto.Changeset, only: [cast: 3]
+    import Ecto.Query
 
     schema "photos" do
       many_to_many :tags, Tag,
@@ -26,6 +27,17 @@ defmodule PhoenixMTM.ChangesetTest do
       model
       |> cast(params, ~w())
       |> PhoenixMTM.Changeset.cast_collection(:tags, TestRepo, Tag)
+    end
+
+    def custom_function_changeset(data, params \\ %{}) do
+      data
+      |> cast(params, ~w())
+      |> PhoenixMTM.Changeset.cast_collection(:tags, fn ids ->
+        # Convert Strings back to Integers for demonstration
+        ids = Enum.map(ids, &String.to_integer/1)
+
+        TestRepo.all(from t in Tag, where: t.id in ^ids)
+      end)
     end
   end
 
@@ -57,5 +69,15 @@ defmodule PhoenixMTM.ChangesetTest do
     photo = TestRepo.get(Photo, photo.id) |> TestRepo.preload(:tags)
 
     assert photo.tags == [tag_2]
+  end
+
+  test "custom function to lookup collection", %{tag_1: tag_1} do
+    tag_id = to_string(tag_1.id) # Preset ids as strings for demonstration
+    changeset = Photo.custom_function_changeset(%Photo{}, %{tags: [tag_id]})
+
+    photo = TestRepo.insert!(changeset)
+    photo = TestRepo.get(Photo, photo.id) |> TestRepo.preload(:tags)
+
+    assert photo.tags == [tag_1]
   end
 end
