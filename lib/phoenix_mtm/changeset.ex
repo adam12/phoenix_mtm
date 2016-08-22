@@ -25,6 +25,18 @@ defmodule PhoenixMTM.Changeset do
         |> PhoenixMTM.Changeset.cast_collection(:tags, App.Repo, App.Tag)
       end
 
+  ## Passing a custom collection lookup function
+
+      def changeset(data, params \\ %{}) do
+        data
+        |> cast(params, ~w())
+        |> PhoenixMTM.Changeset.cast_collection(:tags, fn ids ->
+          # Convert Strings back to Integers
+          ids = Enum.map(ids, &String.to_integer/1)
+
+          App.Repo.all(from t in App.Tag, where: t.id in ^ids)
+        end)
+      end
   """
   def cast_collection(set, assoc, repo, mod) do
     case Map.fetch(set.params, to_string(assoc)) do
@@ -32,6 +44,20 @@ defmodule PhoenixMTM.Changeset do
         changes =
           ids
           |> all(repo, mod)
+          |> Enum.map(&change/1)
+
+        put_assoc(set, assoc, changes)
+      :error ->
+        put_assoc(set, assoc, [])
+    end
+  end
+
+  def cast_collection(set, assoc, lookup_fn) when is_function(lookup_fn) do
+    case Map.fetch(set.params, to_string(assoc)) do
+      {:ok, ids} ->
+        changes =
+          ids
+          |> lookup_fn.()
           |> Enum.map(&change/1)
 
         put_assoc(set, assoc, changes)
