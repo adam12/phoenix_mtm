@@ -52,18 +52,19 @@ defmodule PhoenixMTM.Helpers do
     )
   end
 
-  defp build_label_with_input(form, field, input_tag, label, label_opts, [nested: true]) do
-    [
-      label form, field, label_opts do
-        [{:safe, "#{label}"}, input_tag]
-      end
-    ]
-  end
-  defp build_label_with_input(form, field, input_tag, label, label_opts, _) do
-    [
-      input_tag,
-      label(form, field, "#{label}", label_opts)
-    ]
+  defp build_label_with_input(form, field, input_tag, label, label_opts, opts) do
+    if {:nested, true} in opts do
+      [
+        label form, field, label_opts do
+          [{:safe, "#{label}"}, input_tag]
+        end
+      ]
+    else
+      [
+        input_tag,
+        label(form, field, "#{label}", label_opts)
+      ]
+    end
   end
 
   defp put_selected(opts, selected, value) do
