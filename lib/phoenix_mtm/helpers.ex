@@ -11,7 +11,6 @@ defmodule PhoenixMTM.Helpers do
   Generates a list of checkboxes and labels to update a Phoenix
   many_to_many relationship.
 
-
   ## Basic Example
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)) %>
@@ -20,6 +19,10 @@ defmodule PhoenixMTM.Helpers do
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)),
             label_opts: [class: "form-input"], input_opts: [class: "form-control"] %>
+
+  ## Options
+
+    * `:nested` - when passed `true`, the label will be wrapped around the checkbox
   """
   def collection_checkboxes(form, field, collection, opts \\ []) do
     name = field_name(form, field) <> "[]"
@@ -38,16 +41,29 @@ defmodule PhoenixMTM.Helpers do
         |> Keyword.put(:value, "#{value}")
         |> put_selected(selected, value)
 
-      [
-        tag(:input, input_opts),
-        label(form, field, "#{label}", [for: id] ++ label_opts)
-      ]
+      input_tag = tag(:input, input_opts)
+      label_opts = label_opts ++ [for: id]
+      build_label_with_input(form, field, input_tag, label, label_opts, opts)
     end)
 
     html_escape(
       inputs ++
       hidden_input(form, field, [name: name, value: ""])
     )
+  end
+
+  defp build_label_with_input(form, field, input_tag, label, label_opts, [nested: true]) do
+    [
+      label form, field, label_opts do
+        [{:safe, "#{label}"}, input_tag]
+      end
+    ]
+  end
+  defp build_label_with_input(form, field, input_tag, label, label_opts, _) do
+    [
+      input_tag,
+      label(form, field, "#{label}", label_opts)
+    ]
   end
 
   defp put_selected(opts, selected, value) do
