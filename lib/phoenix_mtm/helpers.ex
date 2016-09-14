@@ -36,8 +36,16 @@ defmodule PhoenixMTM.Helpers do
     selected = Keyword.get(opts, :selected, [])
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
+    wrapper = Keyword.get(opts, :wrapper, &PhoenixMTM.Wrappers.unwrapped/6)
 
-    inputs = Enum.map(collection, fn {label, value} ->
+    # TODO: Eventually deprecate this option in favour of passing in custom wrapper
+    wrapper = if {:nested, true} in opts do
+      &PhoenixMTM.Wrappers.nested/6
+    else
+      wrapper
+    end
+
+    inputs = Enum.map(collection, fn {label_text, value} ->
       id = field_id(form, field) <> "_#{value}"
 
       input_opts =
@@ -48,30 +56,15 @@ defmodule PhoenixMTM.Helpers do
         |> Keyword.put(:value, "#{value}")
         |> put_selected(selected, value)
 
-      input_tag = tag(:input, input_opts)
       label_opts = label_opts ++ [for: id]
-      build_label_with_input(form, field, input_tag, label, label_opts, opts)
+
+      wrapper.(form, field, input_opts, label_text, label_opts, opts)
     end)
 
     html_escape(
       inputs ++
       hidden_input(form, field, [name: name, value: ""])
     )
-  end
-
-  defp build_label_with_input(form, field, input_tag, label, label_opts, opts) do
-    if {:nested, true} in opts do
-      [
-        label form, field, label_opts do
-          [input_tag, {:safe, "#{label}"}]
-        end
-      ]
-    else
-      [
-        input_tag,
-        label(form, field, "#{label}", label_opts)
-      ]
-    end
   end
 
   defp put_selected(opts, selected, value) do
