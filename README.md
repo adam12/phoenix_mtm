@@ -29,3 +29,17 @@ Add phoenix_mtm to your list of dependencies in `mix.exs`:
 
    You can pass along attributes directly to the generated inputs and labels by
    passing a keyword list inside both `label_opts` and `input_opts` keys.
+
+## Contributing
+
+I love pull requests! If you fork this project and modify it, please ping me to see
+if your changes can be incorporated back into this project.
+
+That said, if your feature idea is nontrivial, you should probably open an issue to
+[discuss it](http://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
+before attempting a pull request.
+
+## License
+
+MIT License, see [LICENSE](LICENSE.md) file.
+
