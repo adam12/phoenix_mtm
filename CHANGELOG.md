@@ -3,6 +3,11 @@
 ## [Unreleased]
 ### Fixed
 - Strip empty binaries from array of ids before casting ([@sebastian](https://github.com/sebastian))
+- Properly order nested tags - checkbox first, label text afterwards ([@creuter](https://github.com/creuter))
+
+## Changed
+- Improved documentation ([@sebastian](https://github.com/sebastian))
+
 
 ## [v0.4.1] - 2019-09-13
 ### Fixed
