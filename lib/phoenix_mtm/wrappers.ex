@@ -19,4 +19,11 @@ defmodule PhoenixMTM.Wrappers do
       end
     ]
   end
+
+  defmacro __using__(_) do
+    quote do
+      import Phoenix.HTML.Form
+      import Phoenix.HTML.Tag
+    end
+  end
 end
