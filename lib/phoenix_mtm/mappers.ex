@@ -1,4 +1,4 @@
-defmodule PhoenixMTM.Wrappers do
+defmodule PhoenixMTM.Mappers do
   import Phoenix.HTML.Form
   import Phoenix.HTML.Tag
 

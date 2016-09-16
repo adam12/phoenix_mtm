@@ -36,13 +36,13 @@ defmodule PhoenixMTM.Helpers do
     selected = Keyword.get(opts, :selected, [])
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
-    wrapper = Keyword.get(opts, :wrapper, &PhoenixMTM.Wrappers.unwrapped/6)
+    mapper = Keyword.get(opts, :mapper, &PhoenixMTM.Mappers.unwrapped/6)
 
-    # TODO: Eventually deprecate this option in favour of passing in custom wrapper
-    wrapper = if {:nested, true} in opts do
-      &PhoenixMTM.Wrappers.nested/6
+    # TODO: Eventually deprecate this option in favour of passing in custom mapper
+    mapper = if {:nested, true} in opts do
+      &PhoenixMTM.Mappers.nested/6
     else
-      wrapper
+      mapper
     end
 
     inputs = Enum.map(collection, fn {label_text, value} ->
@@ -58,7 +58,7 @@ defmodule PhoenixMTM.Helpers do
 
       label_opts = label_opts ++ [for: id]
 
-      wrapper.(form, field, input_opts, label_text, label_opts, opts)
+      mapper.(form, field, input_opts, label_text, label_opts, opts)
     end)
 
     html_escape(
