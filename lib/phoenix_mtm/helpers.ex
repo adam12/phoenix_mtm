@@ -14,13 +14,13 @@ defmodule PhoenixMTM.Helpers do
   ## Basic Example
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
-            Enum.map(@tags, fn tag -> {tag.name, tag.id} end),
+            Enum.map(@tags, &({&1.name, &1.id})),
             selected: Enum.map(f.data.tags, &(&1.id)) %>
 
   ## Custom `<input>` and `<label>` options
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
-            Enum.map(@tags, fn tag -> {tag.name, tag.id} end),
+            Enum.map(@tags, &({&1.name, &1.id})),
             selected: Enum.map(f.data.tags, &(&1.id)),
             label_opts: [class: "form-input"], input_opts: [class: "form-control"] %>
 
@@ -32,8 +32,8 @@ defmodule PhoenixMTM.Helpers do
   you could do the following:
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
-            Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected:
-            Enum.map(f.data.tags, &(&1.id)),
+            Enum.map(@tags, &({&1.name, &1.id})),
+            selected: Enum.map(f.data.tags, &(&1.id)),
             mapper: &(content_tag(:div, &1, class: "checkbox")) %>
 
   ## Options
