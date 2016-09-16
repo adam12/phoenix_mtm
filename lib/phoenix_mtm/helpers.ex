@@ -56,7 +56,7 @@ defmodule PhoenixMTM.Helpers do
     if {:nested, true} in opts do
       [
         label form, field, label_opts do
-          [{:safe, "#{label}"}, input_tag]
+          [input_tag, {:safe, "#{label}"}]
         end
       ]
     else

@@ -19,12 +19,12 @@ defmodule PhoenixMTM.HelpersTest do
       assert form =~
         ~s(
           <label for=\"form_collection_1\">
-            1
             <input id=\"form_collection_1\" name=\"form[collection][]\" type=\"checkbox\" value=\"1\">
+            1
           </label>
           <label for=\"form_collection_2\">
-            2
             <input id=\"form_collection_2\" name=\"form[collection][]\" type=\"checkbox\" value=\"2\">
+            2
           </label>
         ) |> remove_outside_whitespace
     end
