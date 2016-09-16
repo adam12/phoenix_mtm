@@ -24,7 +24,7 @@ defmodule PhoenixMTM.Helpers do
             selected: Enum.map(f.data.tags, &(&1.id)),
             label_opts: [class: "form-input"], input_opts: [class: "form-control"] %>
 
-  # Wrap input elements
+  ## Wrapping the elements
 
   Sometimes it is useful to wrap each `<input>` and `<label>` pair in some
   custom HTML, for example for styling reasons.
