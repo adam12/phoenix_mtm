@@ -1,7 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-Nothing yet
+### Fixed
+- Strip empty binaries from array of ids before casting ([@sebastian](https://github.com/sebastian))
 
 ## [v0.4.1] - 2019-09-13
 ### Fixed
