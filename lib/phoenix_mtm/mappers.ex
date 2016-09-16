@@ -13,8 +13,8 @@ defmodule PhoenixMTM.Mappers do
     [
       label(form, field, label_opts) do
         [
-          {:safe, "#{label_text}"},
-          tag(:input, input_opts)
+          tag(:input, input_opts),
+          {:safe, "#{label_text}"}
         ]
       end
     ]
