@@ -17,7 +17,7 @@ defmodule PhoenixMTM.Helpers do
             Enum.map(@tags, fn tag -> {tag.name, tag.id} end),
             selected: Enum.map(f.data.tags, &(&1.id)) %>
 
-  # Custom <input> and <label> options
+  ## Custom `<input>` and `<label>` options
 
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
             Enum.map(@tags, fn tag -> {tag.name, tag.id} end),
