@@ -37,6 +37,7 @@ defmodule PhoenixMTM.Helpers do
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
     mapper = Keyword.get(opts, :mapper, &PhoenixMTM.Mappers.unwrapped/6)
+    wrapper = Keyword.get(opts, :wrapper, &(&1))
 
     # TODO: Eventually deprecate this option in favour of passing in custom mapper
     mapper = if {:nested, true} in opts do
@@ -59,6 +60,7 @@ defmodule PhoenixMTM.Helpers do
       label_opts = label_opts ++ [for: id]
 
       mapper.(form, field, input_opts, label_text, label_opts, opts)
+      |> wrapper.()
     end)
 
     html_escape(

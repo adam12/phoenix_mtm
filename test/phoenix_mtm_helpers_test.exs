@@ -3,6 +3,7 @@ defmodule PhoenixMTM.HelpersTest do
   import Phoenix.HTML, only: [safe_to_string: 1]
   import Phoenix.HTML.Form, only: [form_for: 4]
   import PhoenixMTM.Helpers, only: [collection_checkboxes: 4, collection_checkboxes: 3]
+  import Phoenix.HTML.Tag, only: [content_tag: 2]
 
   doctest PhoenixMTM.Helpers
 
@@ -26,6 +27,26 @@ defmodule PhoenixMTM.HelpersTest do
             <input id=\"form_collection_2\" name=\"form[collection][]\" type=\"checkbox\" value=\"2\">
             2
           </label>
+        ) |> remove_outside_whitespace
+    end
+  end
+
+  describe "when passed the wrapper option" do
+    test "wraps each label and input" do
+      form = safe_to_string(form_for conn(), "/", [as: :form], fn f ->
+        collection_checkboxes(f, :collection, ["1": 1, "2": 2], wrapper: &content_tag(:p, &1))
+      end)
+
+      assert form =~
+        ~s(
+          <p>
+            <input id=\"form_collection_1\" name=\"form[collection][]\" type=\"checkbox\" value=\"1\">
+            <label for=\"form_collection_1\">1</label>
+          </p>
+          <p>
+            <input id=\"form_collection_2\" name=\"form[collection][]\" type=\"checkbox\" value=\"2\">
+            <label for=\"form_collection_2\">2</label>
+          </p>
         ) |> remove_outside_whitespace
     end
   end
