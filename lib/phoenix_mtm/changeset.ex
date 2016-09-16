@@ -55,6 +55,7 @@ defmodule PhoenixMTM.Changeset do
       {:ok, ids} ->
         changes =
           ids
+          |> Enum.reject(&(&1 === ""))
           |> lookup_fn.()
           |> Enum.map(&change/1)
 
