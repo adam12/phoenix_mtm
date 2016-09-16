@@ -13,12 +13,28 @@ defmodule PhoenixMTM.Helpers do
 
   ## Basic Example
 
-      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)) %>
+      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
+            Enum.map(@tags, &({&1.name, &1.id})),
+            selected: Enum.map(f.data.tags, &(&1.id)) %>
 
-  # Custom <input> and <label> options
+  ## Custom `<input>` and `<label>` options
 
-      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags, Enum.map(@tags, fn tag -> {tag.name, tag.id} end), selected: Enum.map(f.data.tags, &(&1.id)),
+      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
+            Enum.map(@tags, &({&1.name, &1.id})),
+            selected: Enum.map(f.data.tags, &(&1.id)),
             label_opts: [class: "form-input"], input_opts: [class: "form-control"] %>
+
+  ## Wrapping the elements
+
+  Sometimes it is useful to wrap each `<input>` and `<label>` pair in some
+  custom HTML, for example for styling reasons.
+  For example if you wanted to wrap each element in a `<div>` with the class `checkbox`,
+  you could do the following:
+
+      <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
+            Enum.map(@tags, &({&1.name, &1.id})),
+            selected: Enum.map(f.data.tags, &(&1.id)),
+            mapper: &(content_tag(:div, &1, class: "checkbox")) %>
 
   ## Options
 
@@ -29,6 +45,7 @@ defmodule PhoenixMTM.Helpers do
     selected = Keyword.get(opts, :selected, [])
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
+    mapper = Keyword.get(opts, :mapper, &(&1))
 
     inputs = Enum.map(collection, fn {label, value} ->
       id = field_id(form, field) <> "_#{value}"
@@ -43,7 +60,8 @@ defmodule PhoenixMTM.Helpers do
 
       input_tag = tag(:input, input_opts)
       label_opts = label_opts ++ [for: id]
-      build_label_with_input(form, field, input_tag, label, label_opts, opts)
+      element = build_label_with_input(form, field, input_tag, label, label_opts, opts)
+      mapper.(element)
     end)
 
     html_escape(
