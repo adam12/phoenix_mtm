@@ -39,24 +39,23 @@ defmodule PhoenixMTM.Changeset do
       end
   """
   def cast_collection(set, assoc, repo, mod) do
-    case Map.fetch(set.params, to_string(assoc)) do
-      {:ok, ids} ->
-        changes =
-          ids
-          |> all(repo, mod)
-          |> Enum.map(&change/1)
-
-        put_assoc(set, assoc, changes)
-      :error ->
-        set
-    end
+    perform_cast(set, assoc, &all(&1, repo, mod))
   end
 
   def cast_collection(set, assoc, lookup_fn) when is_function(lookup_fn) do
+    perform_cast(set, assoc, lookup_fn)
+  end
+
+  defp all(ids, repo, mod) do
+    repo.all(from m in mod, where: m.id in ^ids)
+  end
+
+  defp perform_cast(set, assoc, lookup_fn) do
     case Map.fetch(set.params, to_string(assoc)) do
       {:ok, ids} ->
         changes =
           ids
+          |> Enum.reject(&(&1 === ""))
           |> lookup_fn.()
           |> Enum.map(&change/1)
 
@@ -64,9 +63,5 @@ defmodule PhoenixMTM.Changeset do
       :error ->
         set
     end
-  end
-
-  defp all(ids, repo, mod) do
-    repo.all(from m in mod, where: m.id in ^ids)
   end
 end
