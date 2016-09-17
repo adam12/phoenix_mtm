@@ -1,15 +1,21 @@
 defmodule PhoenixMTM.Mixfile do
   use Mix.Project
 
+  @version "0.4.2"
+
   def project do
     [app: :phoenix_mtm,
-     version: "0.4.2",
+     version: @version,
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     description: description,
-     package: package,
-     deps: deps]
+     description: description(),
+     package: package(),
+     deps: deps(),
+     name: "PhoenixMTM",
+     docs: [extras: ["README.md", "CHANGELOG.md"], main: "readme",
+            source_ref: "v#{@version}",
+            source_url: "https://github.com/adam12/phoenix_mtm"]]
   end
 
   # Configuration for the OTP application
