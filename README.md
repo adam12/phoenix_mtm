@@ -41,5 +41,5 @@ before attempting a pull request.
 
 ## License
 
-MIT License, see [LICENSE](LICENSE.md) file.
-
+PhoenixMTM is released under the MIT License. See [LICENSE](LICENSE.md) file for
+more information.
