@@ -4,7 +4,6 @@ defmodule PhoenixMTM.Helpers do
   """
 
   import Phoenix.HTML
-  import Phoenix.HTML.Tag
   import Phoenix.HTML.Form
 
   @doc ~S"""
