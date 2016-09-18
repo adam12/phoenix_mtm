@@ -1,9 +1,9 @@
 defmodule PhoenixMTM.HelpersTest do
   use ExUnit.Case
   import Phoenix.HTML, only: [safe_to_string: 1]
-  import Phoenix.HTML.Form, only: [form_for: 4]
+  import Phoenix.HTML.Form, only: [form_for: 4, label: 4]
   import PhoenixMTM.Helpers, only: [collection_checkboxes: 4, collection_checkboxes: 3]
-  import Phoenix.HTML.Tag, only: [content_tag: 2]
+  import Phoenix.HTML.Tag, only: [content_tag: 2, content_tag: 3, tag: 2]
 
   doctest PhoenixMTM.Helpers
 
@@ -31,7 +31,7 @@ defmodule PhoenixMTM.HelpersTest do
     end
   end
 
-  describe "when passed the wrapper option" do
+  describe "when passed the :wrapper option" do
     test "wraps each label and input" do
       form = safe_to_string(form_for conn(), "/", [as: :form], fn f ->
         collection_checkboxes(f, :collection, ["1": 1, "2": 2], wrapper: &content_tag(:p, &1))
@@ -47,6 +47,41 @@ defmodule PhoenixMTM.HelpersTest do
             <input id=\"form_collection_2\" name=\"form[collection][]\" type=\"checkbox\" value=\"2\">
             <label for=\"form_collection_2\">2</label>
           </p>
+        ) |> remove_outside_whitespace
+    end
+  end
+
+  describe "when passed the :mapper option" do
+    test "maps each label and input into a specified structure" do
+      mapper = fn(form, field, input_opts, label_text, label_opts, _opts) ->
+        content_tag(:div, class: "checkbox") do
+          label(form, field, label_opts) do
+            [
+              tag(:input, input_opts),
+              {:safe, "#{label_text}"}
+            ]
+          end
+        end
+      end
+
+      form = safe_to_string(form_for conn(), "/", [as: :form], fn f ->
+        collection_checkboxes(f, :collection, ["1": 1, "2": 2], mapper: mapper)
+      end)
+
+      assert form =~
+        ~s(
+          <div class=\"checkbox\">
+            <label for=\"form_collection_1\">
+              <input id=\"form_collection_1\" name=\"form[collection][]\" type=\"checkbox\" value=\"1\">
+              1
+            </label>
+          </div>
+          <div class=\"checkbox\">
+            <label for=\"form_collection_2\">
+              <input id=\"form_collection_2\" name=\"form[collection][]\" type=\"checkbox\" value=\"2\">
+              2
+            </label>
+          </div>
         ) |> remove_outside_whitespace
     end
   end
