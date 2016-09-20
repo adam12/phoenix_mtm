@@ -25,7 +25,6 @@ defmodule PhoenixMTM.Helpers do
 
   ## Options
 
-    * `:nested` - when passed `true`, the label will be wrapped around the checkbox
     * `:selected` - a list of options that should be pre-selected
     * `:input_opts` - a list of attributes to be applied to each checkbox input
     * `:label_opts` - a list of attributes to be applied to each checkbox label
