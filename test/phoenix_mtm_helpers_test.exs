@@ -1,6 +1,6 @@
 defmodule PhoenixMTM.HelpersTest do
   use ExUnit.Case
-  import Phoenix.HTML, only: [safe_to_string: 1]
+  import Phoenix.HTML, only: [safe_to_string: 1, html_escape: 1]
   import Phoenix.HTML.Form, only: [form_for: 4, label: 4]
   import PhoenixMTM.Helpers, only: [collection_checkboxes: 4, collection_checkboxes: 3]
   import Phoenix.HTML.Tag, only: [content_tag: 2, content_tag: 3, tag: 2]
@@ -66,7 +66,7 @@ defmodule PhoenixMTM.HelpersTest do
           label(form, field, label_opts) do
             [
               tag(:input, input_opts),
-              {:safe, "#{label_text}"}
+              html_escape(label_text)
             ]
           end
         end
