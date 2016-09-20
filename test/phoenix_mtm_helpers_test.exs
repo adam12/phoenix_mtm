@@ -12,6 +12,14 @@ defmodule PhoenixMTM.HelpersTest do
   end
 
   describe "when passed the :nested option" do
+    test "doesn't allow xss" do
+      form = safe_to_string(form_for conn(), "/", [as: :form], fn f ->
+        collection_checkboxes(f, :collection, ["<script>alert()</script>": 1, "2": 2], nested: true, other_option: true)
+      end)
+
+      refute form =~ ~s(<script>)
+    end
+
     test "generates list of labels with a checkbox nested in each" do
       form = safe_to_string(form_for conn(), "/", [as: :form], fn f ->
         collection_checkboxes(f, :collection, ["1": 1, "2": 2], nested: true, other_option: true)

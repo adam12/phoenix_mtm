@@ -1,7 +1,9 @@
 # Changelog
 
 ## Unreleased
-- Nothing yet
+### Changed
+- `nested` option now escapes label text by default (BREAKING CHANGE). Use
+  `unsafe_nested` mapper to bring back original functionality.
 
 ## [v0.4.2] - 2016-09-16
 ### Fixed

@@ -21,6 +21,7 @@ defmodule PhoenixMTM.Mappers do
 
   import Phoenix.HTML.Form
   import Phoenix.HTML.Tag
+  import Phoenix.HTML, only: [html_escape: 1]
 
   @doc ~S"""
   Checkbox input and label returned as a 2 element list - the default.
@@ -53,14 +54,40 @@ defmodule PhoenixMTM.Mappers do
   ```
   """
   def nested(form, field, input_opts, label_text, label_opts, _opts) do
-    [
-      label(form, field, label_opts) do
-        [
-          tag(:input, input_opts),
-          {:safe, "#{label_text}"}
-        ]
-      end
-    ]
+    label(form, field, label_opts) do
+      [
+        tag(:input, input_opts),
+        html_escape(label_text)
+      ]
+    end
+  end
+
+  @doc ~S"""
+  Checkbox input and label returned as a label with the checkbox and label text
+  nested within. The label text is not escaped in any way.
+
+  If you are displaying labels that might be provided by untrusted users, you
+  absolutely *do not* want to use this mapper.
+
+  This mapper will be deprecated at a later date. If you wish to keep this
+  functionality, copy it to your own custom mapper module.
+
+  ### Example Output
+
+  ```html
+  <label for="checkbox_1">
+    <input type="checkbox" value="1" name="checkbox_1">
+    1
+  </label>
+  ```
+  """
+  def unsafe_nested(form, field, input_opts, label_text, label_opts, _opts) do
+    label(form, field, label_opts) do
+      [
+        tag(:input, input_opts),
+        {:safe, "#{label_text}"}
+      ]
+    end
   end
 
   defmacro __using__(_) do
