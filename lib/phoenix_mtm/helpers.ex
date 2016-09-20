@@ -88,8 +88,11 @@ defmodule PhoenixMTM.Helpers do
     mapper = Keyword.get(opts, :mapper, &PhoenixMTM.Mappers.unwrapped/6)
     wrapper = Keyword.get(opts, :wrapper, &(&1))
 
-    # TODO: Eventually deprecate this option in favour of passing in custom mapper
     mapper = if {:nested, true} in opts do
+      IO.write :stderr, """
+      warning: using nested option is deprecated. Use nested mapper instead.
+      #{Exception.format_stacktrace}
+      """
       &PhoenixMTM.Mappers.nested/6
     else
       mapper
