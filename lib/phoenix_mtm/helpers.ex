@@ -66,7 +66,7 @@ defmodule PhoenixMTM.Helpers do
             label(form, field, label_opts) do
               [
                 tag(:input, input_opts),
-                {:safe, "#{label_text}"}
+                html_escape(label_text)
               ]
             end
           end
