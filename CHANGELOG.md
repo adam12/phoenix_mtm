@@ -1,9 +1,18 @@
 # Changelog
 
 ## Unreleased
+### Added
+- Add the ability to provide a custom wrapper through the `wrapper` option.
+- Add the ability to provide a custom mapper through the `mapper` option.
+
 ### Changed
 - `nested` option now escapes label text by default (BREAKING CHANGE). Use
   `unsafe_nested` mapper to bring back original functionality.
+
+### Deprecated
+- The `nested` option has been deprecated in favour of the passing of a custom mapper.
+  Use the `PhoenixMTM.Mappers.nested/6` mapper to as a migration path.
+
 
 ## [v0.4.2] - 2016-09-16
 ### Fixed
