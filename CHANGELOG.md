@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+Nothing yet
+
+## [v0.5.0] - 2016-09-23
 ### Added
 - Add the ability to provide a custom wrapper through the `wrapper` option.
 - Add the ability to provide a custom mapper through the `mapper` option.
@@ -8,6 +11,7 @@
 ### Changed
 - `nested` option now escapes label text by default (BREAKING CHANGE). Use
   `unsafe_nested` mapper to bring back original functionality.
+- Documentation improvements
 
 ### Deprecated
 - The `nested` option has been deprecated in favour of the passing of a custom mapper.
@@ -61,7 +65,8 @@
 - Initial functionality implemented
 
 
-[Unreleased]: https://github.com/adam12/phoenix_mtm/compare/v0.4.2...HEAD
+[Unreleased]: https://github.com/adam12/phoenix_mtm/compare/v0.5.0...HEAD
+[v0.5.0]: https://github.com/adam12/phoenix_mtm/compare/v0.4.2...v0.5.0
 [v0.4.2]: https://github.com/adam12/phoenix_mtm/compare/v0.4.1...v0.4.2
 [v0.4.1]: https://github.com/adam12/phoenix_mtm/compare/v0.4.0...v0.4.1
 [v0.4.0]: https://github.com/adam12/phoenix_mtm/compare/v0.3.0...v0.4.0
