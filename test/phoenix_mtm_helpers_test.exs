@@ -61,12 +61,12 @@ defmodule PhoenixMTM.HelpersTest do
 
   describe "when passed the :mapper option" do
     test "maps each label and input into a specified structure" do
-      mapper = fn(form, field, input_opts, label_text, label_opts, _opts) ->
+      mapper = fn(form, field, input_opts, label_content, label_opts, _opts) ->
         content_tag(:div, class: "checkbox") do
           label(form, field, label_opts) do
             [
               tag(:input, input_opts),
-              html_escape(label_text)
+              html_escape(label_content)
             ]
           end
         end

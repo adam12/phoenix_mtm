@@ -61,12 +61,12 @@ defmodule PhoenixMTM.Helpers do
       defmodule CustomMappers do
         use PhoenixMTM.Mappers
 
-        def bootstrap(form, field, input_opts, label_text, label_opts, _opts) do
+        def bootstrap(form, field, input_opts, label_content, label_opts, _opts) do
           content_tag(:div, class: "checkbox") do
             label(form, field, label_opts) do
               [
                 tag(:input, input_opts),
-                html_escape(label_text)
+                html_escape(label_content)
               ]
             end
           end
@@ -97,7 +97,7 @@ defmodule PhoenixMTM.Helpers do
       mapper
     end
 
-    inputs = Enum.map(collection, fn {label_text, value} ->
+    inputs = Enum.map(collection, fn {label_content, value} ->
       id = field_id(form, field) <> "_#{value}"
 
       input_opts =
@@ -110,7 +110,7 @@ defmodule PhoenixMTM.Helpers do
 
       label_opts = label_opts ++ [for: id]
 
-      mapper.(form, field, input_opts, label_text, label_opts, opts)
+      mapper.(form, field, input_opts, label_content, label_opts, opts)
       |> wrapper.()
     end)
 

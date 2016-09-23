@@ -33,10 +33,10 @@ defmodule PhoenixMTM.Mappers do
   <label for="checkbox_1">1</label>
   ```
   """
-  def unwrapped(form, field, input_opts, label_text, label_opts, _opts) do
+  def unwrapped(form, field, input_opts, label_content, label_opts, _opts) do
     [
       tag(:input, input_opts),
-      label(form, field, "#{label_text}", label_opts)
+      label(form, field, "#{label_content}", label_opts)
     ]
   end
 
@@ -53,11 +53,11 @@ defmodule PhoenixMTM.Mappers do
   </label>
   ```
   """
-  def nested(form, field, input_opts, label_text, label_opts, _opts) do
+  def nested(form, field, input_opts, label_content, label_opts, _opts) do
     label(form, field, label_opts) do
       [
         tag(:input, input_opts),
-        html_escape(label_text)
+        html_escape(label_content)
       ]
     end
   end
@@ -81,11 +81,11 @@ defmodule PhoenixMTM.Mappers do
   </label>
   ```
   """
-  def unsafe_nested(form, field, input_opts, label_text, label_opts, _opts) do
+  def unsafe_nested(form, field, input_opts, label_content, label_opts, _opts) do
     label(form, field, label_opts) do
       [
         tag(:input, input_opts),
-        {:safe, "#{label_text}"}
+        {:safe, "#{label_content}"}
       ]
     end
   end
