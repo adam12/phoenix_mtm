@@ -21,7 +21,7 @@ defmodule PhoenixMTM.Mappers do
 
   import Phoenix.HTML.Form
   import Phoenix.HTML.Tag
-  import Phoenix.HTML, only: [html_escape: 1]
+  import Phoenix.HTML
 
   @doc ~S"""
   Checkbox input and label returned as a 2 element list - the default.
@@ -92,6 +92,7 @@ defmodule PhoenixMTM.Mappers do
 
   defmacro __using__(_) do
     quote do
+      import Phoenix.HTML
       import Phoenix.HTML.Form
       import Phoenix.HTML.Tag
     end
