@@ -3,8 +3,8 @@ defmodule PhoenixMTM.Helpers do
   Provides HTML helpers for Phoenix.
   """
 
-  import Phoenix.HTML
-  import Phoenix.HTML.Form
+  import Phoenix.HTML, only: [html_escape: 1]
+  import Phoenix.HTML.Form, only: [field_name: 2, field_id: 2, hidden_input: 3 ]
 
   @doc ~S"""
   Generates a list of checkboxes and labels to update a Phoenix
