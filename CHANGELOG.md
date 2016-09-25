@@ -1,7 +1,8 @@
 # Changelog
 
 ## Unreleased
-Nothing yet
+### Changed
+- Reject nils during cast ([@satb](https://github.com/satb))
 
 ## [v0.5.0] - 2016-09-23
 ### Added
