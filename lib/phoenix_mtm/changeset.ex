@@ -74,6 +74,7 @@ defmodule PhoenixMTM.Changeset do
         changes =
           ids
           |> Enum.reject(&(&1 === ""))
+          |> Enum.reject(&(&1 === nil))
           |> lookup_fn.()
           |> Enum.map(&change/1)
 
