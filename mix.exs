@@ -27,7 +27,7 @@ defmodule PhoenixMTM.Mixfile do
 
   defp deps do
     [{:phoenix_html, "~> 2.0"},
-     {:ecto, "~> 2.0.0"},
+     {:ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0", [optional: true]},
      {:ex_doc, ">= 0.0.0", only: :dev}]
   end
