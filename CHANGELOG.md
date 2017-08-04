@@ -1,8 +1,12 @@
 # Changelog
 
 ## Unreleased
+
+
+## [v0.5.1] - 2017-08-04
 ### Changed
 - Reject nils during cast ([@satb](https://github.com/satb))
+- Relax dependency on Ecto version
 
 ## [v0.5.0] - 2016-09-23
 ### Added
@@ -66,7 +70,8 @@
 - Initial functionality implemented
 
 
-[Unreleased]: https://github.com/adam12/phoenix_mtm/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/adam12/phoenix_mtm/compare/v0.5.1...HEAD
+[v0.5.1]: https://github.com/adam12/phoenix_mtm/compare/v0.5.0...v0.5.1
 [v0.5.0]: https://github.com/adam12/phoenix_mtm/compare/v0.4.2...v0.5.0
 [v0.4.2]: https://github.com/adam12/phoenix_mtm/compare/v0.4.1...v0.4.2
 [v0.4.1]: https://github.com/adam12/phoenix_mtm/compare/v0.4.0...v0.4.1
