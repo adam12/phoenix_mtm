@@ -8,7 +8,7 @@ Application.put_env(:ecto, TestRepo,
   pool: Ecto.Adapters.SQL.Sandbox)
 
 defmodule Ecto.Integration.TestRepo do
-  use Ecto.Repo, otp_app: :ecto
+  use Ecto.Repo, otp_app: :ecto, adapter: Ecto.Adapters.Postgres
 end
 
 {:ok, _} = Ecto.Adapters.Postgres.ensure_all_started(TestRepo, :temporary)
