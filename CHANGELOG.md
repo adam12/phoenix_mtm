@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## [v1.0.0]
+### Changed
+- Update to Ecto 3 ([kevbuchanan](https://github.com/kevbuchanan))
 
 ## [v0.5.1] - 2017-08-04
 ### Changed
