@@ -12,6 +12,12 @@ If you are familiar with Ruby on Rails, analogous to `collection_check_boxes`.
 Add phoenix_mtm to your list of dependencies in `mix.exs`:
 
       def deps do
+        [{:phoenix_mtm, "~> 1.0.0"}]
+      end
+
+If you're still on Ecto 2, you'll want to use the pre-1.0 release:
+
+      def deps do
         [{:phoenix_mtm, "~> 0.5.1"}]
       end
 
