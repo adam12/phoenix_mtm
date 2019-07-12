@@ -1,0 +1,17 @@
+# vim:ts=2:sts=2:sw=2:et:
+---
+version: 2
+jobs:
+  "elixir-1.4":
+    docker:
+      - image: circleci/elixir:1.4
+    steps:
+      - checkout
+      - run: mix deps.get
+      - run: mix test
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - "elixir-1.4"
