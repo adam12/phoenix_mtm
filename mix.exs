@@ -32,7 +32,7 @@ defmodule PhoenixMTM.Mixfile do
 
   defp deps do
     [
-      {:phoenix_html, "~> 2.0"},
+      {:phoenix_html, "~> 3.0"},
       {:ecto, "~> 3.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0", [optional: true]},
