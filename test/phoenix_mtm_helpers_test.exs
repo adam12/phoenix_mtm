@@ -1,5 +1,6 @@
 defmodule PhoenixMTM.HelpersTest do
   use ExUnit.Case
+  use Plug.Test
   import Phoenix.HTML, only: [safe_to_string: 1, html_escape: 1]
   import Phoenix.HTML.Form, only: [form_for: 4, label: 4]
   import PhoenixMTM.Helpers, only: [collection_checkboxes: 4, collection_checkboxes: 3]
@@ -118,7 +119,7 @@ defmodule PhoenixMTM.HelpersTest do
     end)
 
     assert form =~
-      ~s(<input checked=\"checked\" id=\"form_collection_1\" name=\"form[collection][]\" type=\"checkbox\" value=\"1\"><label for=\"form_collection_1\">1</label><input id=\"form_collection_2\" name=\"form[collection][]\" type=\"checkbox\" value=\"2\"><label for=\"form_collection_2\">2</label>)
+      ~s(<input id=\"form_collection_1\" name=\"form[collection][]\" type=\"checkbox\" value=\"1\" checked><label for=\"form_collection_1\">1</label><input id=\"form_collection_2\" name=\"form[collection][]\" type=\"checkbox\" value=\"2\"><label for=\"form_collection_2\">2</label>)
   end
 
   test "generates hidden input" do

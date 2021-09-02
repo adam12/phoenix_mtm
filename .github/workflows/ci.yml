@@ -1,0 +1,36 @@
+---
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ['23']
+        elixir: ['1.9.4', '1.10.4', '1.11.4', '1.12.2']
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: phoenix_mtm_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v2
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{matrix.otp}}
+          elixir-version: ${{matrix.elixir}}
+      - run: mix deps.get
+      - name: Run all tests
+        env:
+          DATABASE_URL: "ecto://postgres:postgres@localhost/phoenix_mtm_test"
+        run: mix test

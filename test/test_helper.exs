@@ -4,7 +4,7 @@ alias Ecto.Integration.TestRepo
 
 Application.put_env(:ecto, TestRepo,
   adapter: Ecto.Adapters.Postgres,
-  url: "ecto://localhost/phoenix_mtm_test",
+  url: System.get_env("DATABASE_URL", "ecto://localhost/phoenix_mtm_test"),
   pool: Ecto.Adapters.SQL.Sandbox)
 
 defmodule Ecto.Integration.TestRepo do
