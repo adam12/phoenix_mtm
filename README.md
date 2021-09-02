@@ -1,5 +1,5 @@
 # Phoenix MTM Helpers
-[![CircleCI](https://circleci.com/gh/adam12/phoenix_mtm.svg?style=svg)](https://circleci.com/gh/adam12/phoenix_mtm)
+[![.github/workflows/ci.yml](https://github.com/adam12/phoenix_mtm/actions/workflows/ci.yml/badge.svg)](https://github.com/adam12/phoenix_mtm/actions/workflows/ci.yml)
 [![API Docs](https://img.shields.io/badge/api-docs-yellow.svg?style=flat)](https://hexdocs.pm/phoenix_mtm/)
 
 A small collection of functions to make it easier working with `many_to_many` Ecto
