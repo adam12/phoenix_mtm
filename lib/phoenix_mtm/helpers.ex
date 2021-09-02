@@ -4,7 +4,7 @@ defmodule PhoenixMTM.Helpers do
   """
 
   import Phoenix.HTML, only: [html_escape: 1]
-  import Phoenix.HTML.Form, only: [field_name: 2, field_id: 2, hidden_input: 3 ]
+  import Phoenix.HTML.Form, only: [input_name: 2, input_id: 2, hidden_input: 3 ]
 
   @doc ~S"""
   Generates a list of checkboxes and labels to update a Phoenix
@@ -80,7 +80,7 @@ defmodule PhoenixMTM.Helpers do
             mapper: &CustomMappers.bootstrap/6
   """
   def collection_checkboxes(form, field, collection, opts \\ []) do
-    name = field_name(form, field) <> "[]"
+    name = input_name(form, field) <> "[]"
     selected = Keyword.get(opts, :selected, [])
     input_opts = Keyword.get(opts, :input_opts, [])
     label_opts = Keyword.get(opts, :label_opts, [])
@@ -98,7 +98,7 @@ defmodule PhoenixMTM.Helpers do
     end
 
     inputs = Enum.map(collection, fn {label_content, value} ->
-      id = field_id(form, field) <> "_#{value}"
+      id = input_id(form, field) <> "_#{value}"
 
       input_opts =
         input_opts
