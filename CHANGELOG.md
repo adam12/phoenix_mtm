@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Update dependency on `phoenix_html` to `>= 3.0`
 
 ## [v1.0.0]
 ### Changed
