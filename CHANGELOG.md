@@ -1,9 +1,15 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+
 ## Unreleased
 - Update dependency on `phoenix_html` to `>= 3.0`
 
-## [v1.0.0]
+## [v1.0.0] 2019-01-27
 ### Changed
 - Update to Ecto 3 ([kevbuchanan](https://github.com/kevbuchanan))
 
@@ -32,7 +38,7 @@
 - Strip empty binaries from array of ids before casting ([@sebastian](https://github.com/sebastian))
 - Properly order nested tags - checkbox first, label text afterwards ([@creuter](https://github.com/creuter))
 
-## Changed
+### Changed
 - Improved documentation ([@sebastian](https://github.com/sebastian))
 
 

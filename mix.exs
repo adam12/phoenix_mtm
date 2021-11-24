@@ -1,31 +1,23 @@
 defmodule PhoenixMTM.Mixfile do
   use Mix.Project
 
+  @source_url "https://github.com/adam12/phoenix_mtm"
   @version "1.0.0"
 
   def project do
     [
       app: :phoenix_mtm,
+      name: "PhoenixMTM",
       version: @version,
       elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      description: description(),
-      package: package(),
       deps: deps(),
-      name: "PhoenixMTM",
-      docs: [
-        extras: ["README.md", "CHANGELOG.md"],
-        main: "readme",
-        source_ref: "v#{@version}",
-        source_url: "https://github.com/adam12/phoenix_mtm"
-      ]
+      docs: docs(),
+      package: package()
     ]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
     [extra_applications: [:logger]]
   end
@@ -36,23 +28,36 @@ defmodule PhoenixMTM.Mixfile do
       {:ecto, "~> 3.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0", [optional: true]},
-      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:plug, ">= 0.0.0", only: :test}
     ]
   end
 
-  defp description do
-    """
-    A small collection of functions to make it easier working with Ecto
-    many_to_many assocations and checkbox arrays.
-    """
+  defp docs do
+    [
+      extras: [
+        "CHANGELOG.md": [],
+        "LICENSE.md": [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
+      main: "readme",
+      source_ref: "v#{@version}",
+      source_url: @source_url,
+      formatters: ["html"]
+    ]
   end
 
   defp package do
     [
+      description:
+        "A small collection of functions to make it easier working " <>
+          "with Ecto many_to_many associations and checkbox arrays.",
       maintainers: ["Adam Daniels"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/adam12/phoenix_mtm"}
+      links: %{
+        "Changelog" => "https://hexdocs.pm/phoenix_mtm/changelog.html",
+        "GitHub" => @source_url
+      }
     ]
   end
 end
