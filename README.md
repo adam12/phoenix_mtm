@@ -1,6 +1,12 @@
 # Phoenix MTM Helpers
+
 [![.github/workflows/ci.yml](https://github.com/adam12/phoenix_mtm/actions/workflows/ci.yml/badge.svg)](https://github.com/adam12/phoenix_mtm/actions/workflows/ci.yml)
-[![API Docs](https://img.shields.io/badge/api-docs-yellow.svg?style=flat)](https://hexdocs.pm/phoenix_mtm/)
+[![Module Version](https://img.shields.io/hexpm/v/phoenix_mtm.svg)](https://hex.pm/packages/phoenix_mtm)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/phoenix_mtm/)
+[![Total Download](https://img.shields.io/hexpm/dt/phoenix_mtm.svg)](https://hex.pm/packages/phoenix_mtm)
+[![License](https://img.shields.io/hexpm/l/phoenix_mtm.svg)](https://github.com/adam12/phoenix_mtm/blob/master/LICENSE.md)
+[![Last Updated](https://img.shields.io/github/last-commit/adam12/phoenix_mtm.svg)](https://github.com/adam12/phoenix_mtm/commits/master)
+
 
 A small collection of functions to make it easier working with `many_to_many` Ecto
 associations and checkboxes to create them.
@@ -9,17 +15,25 @@ If you are familiar with Ruby on Rails, analogous to `collection_check_boxes`.
 
 ## Installation
 
-Add phoenix_mtm to your list of dependencies in `mix.exs`:
+Add `:phoenix_mtm` to your list of dependencies in `mix.exs`:
 
-      def deps do
-        [{:phoenix_mtm, "~> 1.0.0"}]
-      end
+```elixir
+def deps do
+  [
+    {:phoenix_mtm, "~> 1.0.0"}
+  ]
+end
+```
 
 If you're still on Ecto 2, you'll want to use the pre-1.0 release:
 
-      def deps do
-        [{:phoenix_mtm, "~> 0.5.1"}]
-      end
+```elixir
+def deps do
+  [
+    {:phoenix_mtm, "~> 0.5.1"}
+  ]
+end
+```
 
 ## Usage
 
@@ -28,7 +42,7 @@ If you're still on Ecto 2, you'll want to use the pre-1.0 release:
    in the docs for `PhoenixMTM.Changeset.cast_collection`.
 
 2. Inside your changeset function, pipe your changeset through `PhoenixMTM.Changeset.cast_collection`,
-   providing the association name, repo module, ans association module.
+   providing the association name, repo module, and association module.
 
 3. Inside your template, call `PhoenixMTM.Helpers.collection_checkboxes` where
    you want the output of checkboxes to occur. This function accepts a form,
@@ -46,7 +60,9 @@ That said, if your feature idea is nontrivial, you should probably open an issue
 [discuss it](http://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
 before attempting a pull request.
 
-## License
+## Copyright and License
 
-PhoenixMTM is released under the MIT License. See [LICENSE](LICENSE.md) file for
-more information.
+Copyright (c) 2016 Adam Daniels
+
+This work is free. You can redistribute it and/or modify it under the
+terms of the MIT License. See the [LICENSE.md](./LICENSE.md) file for more details.

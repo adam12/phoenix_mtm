@@ -6,6 +6,7 @@ defmodule PhoenixMTM.Mappers do
   `collection_checkboxes` helper.
 
   ## Example
+
       <%= PhoenixMTM.Helpers.collection_checkboxes f, :tags,
             Enum.map(@tags, &({&1.name, &1.id})),
             selected: Enum.map(f.data.tags, &(&1.id)),
@@ -32,6 +33,7 @@ defmodule PhoenixMTM.Mappers do
   <input type="checkbox" value="1" name="checkbox_1">
   <label for="checkbox_1">1</label>
   ```
+
   """
   def unwrapped(form, field, input_opts, label_content, label_opts, _opts) do
     [
@@ -52,6 +54,7 @@ defmodule PhoenixMTM.Mappers do
     1
   </label>
   ```
+
   """
   def nested(form, field, input_opts, label_content, label_opts, _opts) do
     label(form, field, label_opts) do
@@ -80,6 +83,7 @@ defmodule PhoenixMTM.Mappers do
     1
   </label>
   ```
+
   """
   def unsafe_nested(form, field, input_opts, label_content, label_opts, _opts) do
     label(form, field, label_opts) do

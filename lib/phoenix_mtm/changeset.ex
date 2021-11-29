@@ -1,6 +1,6 @@
 defmodule PhoenixMTM.Changeset do
   @moduledoc """
-  Provides many_to_many helpers for Ecto Changesets.
+  Provides `many_to_many` helpers for `Ecto.Changeset`.
 
   The following example schema demonstrates how you would configure the
   functionality of our examples below.
@@ -13,6 +13,7 @@ defmodule PhoenixMTM.Changeset do
           on_delete: :delete_all,
           on_replace: :delete
       end
+
   """
 
   import Ecto.Changeset, only: [put_assoc: 3, change: 1]
@@ -32,6 +33,7 @@ defmodule PhoenixMTM.Changeset do
         |> cast(params, ~w())
         |> PhoenixMTM.Changeset.cast_collection(:tags, App.Repo, App.Tag)
       end
+
   """
   def cast_collection(set, assoc, repo, mod) do
     perform_cast(set, assoc, &all(&1, repo, mod))
@@ -59,6 +61,7 @@ defmodule PhoenixMTM.Changeset do
           App.Repo.all(from t in App.Tag, where: t.id in ^ids)
         end)
       end
+
   """
   def cast_collection(set, assoc, lookup_fn) when is_function(lookup_fn) do
     perform_cast(set, assoc, lookup_fn)

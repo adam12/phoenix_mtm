@@ -78,6 +78,7 @@ defmodule PhoenixMTM.Helpers do
             Enum.map(@tags, &({&1.name, &1.id})),
             selected: Enum.map(f.data.tags, &(&1.id)),
             mapper: &CustomMappers.bootstrap/6
+
   """
   def collection_checkboxes(form, field, collection, opts \\ []) do
     name = input_name(form, field) <> "[]"
